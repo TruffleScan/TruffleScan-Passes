@@ -623,7 +623,7 @@ function updatePhaseBar() {
 
 // ─── LOAD SUPPLIES VIA MULTICALL ──────────────────────────────────────────────
 async function loadSupplies() {
-  const rpc = new ethers.JsonRpcProvider("https://base-rpc.publicnode.com");
+  const rpc = new ethers.JsonRpcProvider("https://1rpc.io/base");
   const mc  = new ethers.Contract(MULTICALL3, MULTICALL_ABI, rpc);
   const iface = new ethers.Interface(ABI);
 
