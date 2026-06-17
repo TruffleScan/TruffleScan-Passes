@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% set active = "verify" %}
+{% block title %}TruffleScan — WOJAK Verify{% endblock %}
+{% block page_title %}🪙 WOJAK Verify{% endblock %}
+{% block page_subtitle %}Unlock free Pro by holding Based Wojak tokens{% endblock %}
+{% block content %}
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title">How It Works</div>
+    <div class="card-desc" style="margin-top:10px;line-height:2;">
+      1️⃣ Hold ≥ required % of Based Wojak supply<br>
+      2️⃣ Send the exact verification amount of WOJAK to the receiving wallet<br>
+      3️⃣ We detect the transfer and verify your holdings automatically<br>
+      4️⃣ Free Pro stays active as long as you hodl
+    </div>
+    <div style="margin-top:18px;padding:14px;background:var(--bg);border:1px solid var(--border);border-radius:8px;">
+      <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Required Holding</div>
+      <div style="font-size:20px;font-weight:700;color:var(--accent);">Sliding scale by market cap</div>
+    </div>
+    <a href="https://t.me/TruffleScanBot" target="_blank">
+      <button class="btn btn-primary btn-full" style="margin-top:16px;">Verify in Telegram Bot</button>
+    </a>
+  </div>
+  <div class="card">
+    <div class="card-title">Verification Status</div>
+    <div class="empty-state">
+      <div class="empty-icon">🪙</div>
+      <div class="empty-title">Not verified</div>
+      <div class="empty-desc">Connect your Telegram account to check your verification status.</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% set active = "balance" %}
+{% block title %}TruffleScan — Balance{% endblock %}
+{% block page_title %}💳 Balance{% endblock %}
+{% block page_subtitle %}Your credit balance and transaction history{% endblock %}
+{% block content %}
+<div class="grid-3" style="margin-bottom:20px;">
+  <div class="stat-card">
+    <div class="stat-label">Available Credits</div>
+    <div class="stat-value purple">—</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Credits Used (All Time)</div>
+    <div class="stat-value">—</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Credits Expiring</div>
+    <div class="stat-value red">—</div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">Transaction History</div>
+  <div class="empty-state">
+    <div class="empty-icon">💳</div>
+    <div class="empty-title">No transactions yet</div>
+    <div class="empty-desc">Your credit purchases and spend history will appear here.</div>
+  </div>
+</div>
+{% endblock %}

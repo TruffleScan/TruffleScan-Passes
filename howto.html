@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% set active = "howto" %}
+{% block title %}TruffleScan — How To{% endblock %}
+{% block page_title %}📖 How To{% endblock %}
+{% block page_subtitle %}How to read your results and get the most out of TruffleScan{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="card-title">🔍 Reading a Scan</div>
+  <div class="card-desc" style="margin-top:10px;line-height:2;">
+    TruffleScan calculates your <strong style="color:var(--text);">real cost basis</strong> by pulling every historical buy and sell transaction for a wallet + token pair. This is not an estimate — it's the actual math from on-chain data.<br><br>
+    <strong style="color:var(--text);">Total Invested</strong> — how much you spent buying the token<br>
+    <strong style="color:var(--text);">Total Received</strong> — how much you got back from sells<br>
+    <strong style="color:var(--text);">Remaining Value</strong> — current value of tokens still held<br>
+    <strong style="color:var(--text);">Net PnL</strong> — your real profit or loss
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">🕵️ Reading an Investigation</div>
+  <div class="card-desc" style="margin-top:10px;line-height:2;">
+    Investigate traces a token backwards through wallets, hop by hop, until it finds the origin — a CEX, DEX, launchpad, or unknown source.<br><br>
+    <strong style="color:var(--text);">Origin Wallet</strong> — where the token started its journey<br>
+    <strong style="color:var(--text);">Hop 1, 2, 3...</strong> — intermediate wallets the token passed through<br>
+    <strong style="color:var(--text);">Investigated Wallet 🎯</strong> — the wallet you submitted<br><br>
+    Amounts shown are how many tokens each wallet received in its <em>first recorded transfer</em> — not current balance.
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">🛡 Reading a TruffleCheck</div>
+  <div class="card-desc" style="margin-top:10px;line-height:2;">
+    TruffleCheck runs 3 layers of security analysis:<br><br>
+    <strong style="color:var(--text);">Layer 1</strong> — GoPlus flags (honeypot, mintable, blacklist, etc.)<br>
+    <strong style="color:var(--text);">Layer 2</strong> — On-chain analysis (liquidity, holder distribution, top wallets)<br>
+    <strong style="color:var(--text);">Layer 3</strong> — 24h and 48h behavioral checks (volume, price action, sell pressure)
+  </div>
+</div>
+{% endblock %}

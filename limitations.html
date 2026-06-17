@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% set active = "limitations" %}
+{% block title %}TruffleScan — Limitations{% endblock %}
+{% block page_title %}📋 Limitations{% endblock %}
+{% block page_subtitle %}Known limitations of TruffleCheck{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="card-title">⚠️ What TruffleScan Can't Do</div>
+  <div class="card-desc" style="margin-top:10px;line-height:2.2;">
+    🔸 <strong style="color:var(--text);">CEX transfers</strong> — if tokens were sent from a centralized exchange, the trail stops there. We can't trace inside Coinbase, Binance, etc.<br>
+    🔸 <strong style="color:var(--text);">Bridges</strong> — cross-chain transfers break the hop trail. A token bridged from ETH to SOL will show the bridge as the origin.<br>
+    🔸 <strong style="color:var(--text);">Multiple senders</strong> — if a wallet received a token from multiple sources, only the earliest sender is traced.<br>
+    🔸 <strong style="color:var(--text);">Current balances</strong> — scan amounts reflect the first recorded transfer, not current holdings.<br>
+    🔸 <strong style="color:var(--text);">Very new tokens</strong> — tokens with limited on-chain history may return incomplete results.<br>
+    🔸 <strong style="color:var(--text);">API rate limits</strong> — during high traffic, some scans may be slower or require a retry.
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% set active = "investigate" %}
+{% block title %}TruffleScan — Investigate{% endblock %}
+{% block page_title %}🕵️ Investigate{% endblock %}
+{% block page_subtitle %}Trace any token back through wallets to its origin{% endblock %}
+{% block content %}
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title">Investigation</div>
+    <div class="card-desc" style="margin-bottom:14px;">Traces a token from your wallet back hop-by-hop to its origin — DEX, CEX, or launchpad.</div>
+    <div class="form-group">
+      <label class="form-label">Wallet to Investigate</label>
+      <input class="form-input" type="text" placeholder="SOL, ETH, or Base wallet...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Token Contract</label>
+      <input class="form-input" type="text" placeholder="Token address...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Chain</label>
+      <div class="chain-picker">
+        <div class="chain-pill active">🟣 Solana — 15 credits</div>
+        <div class="chain-pill">🔷 Ethereum — 75 credits</div>
+        <div class="chain-pill">🔵 Base — 40 credits</div>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-full">Investigate</button>
+  </div>
+  <div class="card">
+    <div class="card-title">Results</div>
+    <div class="empty-state">
+      <div class="empty-icon">🕵️</div>
+      <div class="empty-title">No investigation yet</div>
+      <div class="empty-desc">Results will trace the token hop-by-hop from origin to your wallet.</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

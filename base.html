@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}TruffleScan{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <span class="logo-icon">🍄</span>
+    <span class="logo-text">Truffle<span>Scan</span></span>
+  </div>
+
+  <!-- User / Login -->
+  <div class="sidebar-login">
+    <a href="/login" class="btn-login">Connect with Telegram</a>
+  </div>
+
+  <nav class="sidebar-nav">
+
+    <div class="nav-section">📡 Scanning</div>
+    <a href="/scan" class="nav-item {% if active == 'scan' %}active{% endif %}">
+      <span class="nav-icon">🔍</span> Scan
+    </a>
+    <a href="/shillit" class="nav-item {% if active == 'shillit' %}active{% endif %}">
+      <span class="nav-icon">📤</span> Shillit
+    </a>
+    <a href="/token" class="nav-item {% if active == 'token' %}active{% endif %}">
+      <span class="nav-icon">🪙</span> Token Info
+    </a>
+    <a href="/portfolio" class="nav-item {% if active == 'portfolio' %}active{% endif %}">
+      <span class="nav-icon">💰</span> Portfolio
+    </a>
+    <a href="/investigate" class="nav-item {% if active == 'investigate' %}active{% endif %}">
+      <span class="nav-icon">🕵️</span> Investigate
+    </a>
+    <a href="/check" class="nav-item {% if active == 'check' %}active{% endif %}">
+      <span class="nav-icon">🛡</span> TruffleCheck
+    </a>
+    <a href="/history" class="nav-item {% if active == 'history' %}active{% endif %}">
+      <span class="nav-icon">📜</span> History
+    </a>
+    <a href="/nft" class="nav-item {% if active == 'nft' %}active{% endif %}">
+      <span class="nav-icon">🎨</span> NFT Scanner
+    </a>
+
+    <div class="nav-section">🍄 Truffles & Wallets</div>
+    <a href="/wallets" class="nav-item {% if active == 'wallets' %}active{% endif %}">
+      <span class="nav-icon">💼</span> My Wallets
+    </a>
+    <a href="/saved" class="nav-item {% if active == 'saved' %}active{% endif %}">
+      <span class="nav-icon">⚡️</span> Saved Scans
+    </a>
+    <a href="/monitor" class="nav-item {% if active == 'monitor' %}active{% endif %}">
+      <span class="nav-icon">🔔</span> Monitor
+    </a>
+
+    <div class="nav-section">🎓 Academy</div>
+    <a href="/academy" class="nav-item {% if active == 'academy' %}active{% endif %}">
+      <span class="nav-icon">📚</span> TSU
+    </a>
+
+    <div class="nav-section">🎨 Themes & Branding</div>
+    <a href="/theme" class="nav-item {% if active == 'theme' %}active{% endif %}">
+      <span class="nav-icon">🎨</span> Shill Card Theme
+    </a>
+    <a href="/tokentheme" class="nav-item {% if active == 'tokentheme' %}active{% endif %}">
+      <span class="nav-icon">🖼</span> Token Theme
+    </a>
+    <a href="/branding" class="nav-item {% if active == 'branding' %}active{% endif %}">
+      <span class="nav-icon">🐷</span> Branding <span class="nav-badge">Pro</span>
+    </a>
+
+    <div class="nav-section">💳 Credits & Account</div>
+    <a href="/credits" class="nav-item {% if active == 'credits' %}active{% endif %}">
+      <span class="nav-icon">🪙</span> Buy Credits
+    </a>
+    <a href="/balance" class="nav-item {% if active == 'balance' %}active{% endif %}">
+      <span class="nav-icon">💳</span> Balance
+    </a>
+    <a href="/pro" class="nav-item {% if active == 'pro' %}active{% endif %}">
+      <span class="nav-icon">⭐</span> Go Pro
+    </a>
+    <a href="/profile" class="nav-item {% if active == 'profile' %}active{% endif %}">
+      <span class="nav-icon">👤</span> Profile
+    </a>
+
+    <div class="nav-section">🔐 Verification</div>
+    <a href="/verify" class="nav-item {% if active == 'verify' %}active{% endif %}">
+      <span class="nav-icon">🪙</span> WOJAK Verify
+    </a>
+    <a href="/verifynft" class="nav-item {% if active == 'verifynft' %}active{% endif %}">
+      <span class="nav-icon">🏅</span> Founders NFT
+    </a>
+
+    <div class="nav-section">❓ Info</div>
+    <a href="/howto" class="nav-item {% if active == 'howto' %}active{% endif %}">
+      <span class="nav-icon">📖</span> How To
+    </a>
+    <a href="/limitations" class="nav-item {% if active == 'limitations' %}active{% endif %}">
+      <span class="nav-icon">📋</span> Limitations
+    </a>
+    <a href="/terms" class="nav-item {% if active == 'terms' %}active{% endif %}">
+      <span class="nav-icon">📄</span> Terms
+    </a>
+
+  </nav>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">{% block page_title %}Dashboard{% endblock %}</div>
+      <div class="topbar-subtitle">{% block page_subtitle %}{% endblock %}</div>
+    </div>
+    <div class="topbar-right">
+      <div class="credit-badge">🪙 — credits</div>
+    </div>
+  </div>
+
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
+</div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>

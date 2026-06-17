@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% set active = "check" %}
+{% block title %}TruffleScan — TruffleCheck{% endblock %}
+{% block page_title %}🛡 TruffleCheck{% endblock %}
+{% block page_subtitle %}3-layer security scan — know before you ape{% endblock %}
+{% block content %}
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title">Token Security Scan</div>
+    <div class="card-desc" style="margin-bottom:14px;">Runs GoPlus, on-chain analysis, and holder distribution checks.</div>
+    <div class="form-group">
+      <label class="form-label">Token Contract</label>
+      <input class="form-input" type="text" placeholder="Token address...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Chain</label>
+      <div class="chain-picker">
+        <div class="chain-pill active">🟣 Solana</div>
+        <div class="chain-pill">🔷 Ethereum</div>
+        <div class="chain-pill">🔵 Base</div>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-full">Run TruffleCheck</button>
+  </div>
+  <div class="card">
+    <div class="card-title">Security Report</div>
+    <div class="empty-state">
+      <div class="empty-icon">🛡</div>
+      <div class="empty-title">No report yet</div>
+      <div class="empty-desc">Enter a token contract to get a full 3-layer security report.</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

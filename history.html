@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% set active = "history" %}
+{% block title %}TruffleScan — History{% endblock %}
+{% block page_title %}📜 History{% endblock %}
+{% block page_subtitle %}Your last 5 scans{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="empty-state">
+    <div class="empty-icon">📜</div>
+    <div class="empty-title">No scan history</div>
+    <div class="empty-desc">Your last 5 scans will appear here once you start scanning.</div>
+  </div>
+</div>
+{% endblock %}
