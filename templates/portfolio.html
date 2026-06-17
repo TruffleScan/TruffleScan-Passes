@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% set active = "portfolio" %}
+{% block title %}TruffleScan — Portfolio{% endblock %}
+{% block page_title %}💰 Portfolio{% endblock %}
+{% block page_subtitle %}Full holdings overview for any wallet{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="card-title">Wallet</div>
+  <div class="form-group" style="margin-top:12px;display:flex;gap:10px;">
+    <input class="form-input" type="text" placeholder="SOL, ETH, or Base wallet..." style="flex:1;">
+    <div class="chain-picker" style="margin:0;">
+      <div class="chain-pill active">🟣 SOL</div>
+      <div class="chain-pill">🔷 ETH</div>
+      <div class="chain-pill">🔵 Base</div>
+    </div>
+    <button class="btn btn-primary">Load</button>
+  </div>
+</div>
+<div class="card">
+  <div class="empty-state">
+    <div class="empty-icon">💰</div>
+    <div class="empty-title">No portfolio loaded</div>
+    <div class="empty-desc">Enter a wallet address above to see all holdings.</div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% set active = "pro" %}
+{% block title %}TruffleScan — Go Pro{% endblock %}
+{% block page_title %}⭐ Go Pro{% endblock %}
+{% block page_subtitle %}Unlock unlimited access to TruffleScan{% endblock %}
+{% block content %}
+<div class="grid-2">
+  <div class="card" style="text-align:center;">
+    <div style="font-size:36px;margin-bottom:10px;">⭐</div>
+    <div class="card-title" style="font-size:18px;">Pro</div>
+    <div style="display:flex;gap:10px;justify-content:center;margin:12px 0;">
+      <div style="text-align:center;">
+        <div style="font-size:22px;font-weight:700;color:var(--accent);">100 credits</div>
+        <div style="font-size:11px;color:var(--text-muted);">7 days</div>
+      </div>
+      <div style="color:var(--border);font-size:20px;align-self:center;">|</div>
+      <div style="text-align:center;">
+        <div style="font-size:22px;font-weight:700;color:var(--accent);">300 credits</div>
+        <div style="font-size:11px;color:var(--text-muted);">30 days</div>
+      </div>
+    </div>
+    <div class="card-desc" style="margin-bottom:18px;text-align:left;">
+      ✅ 10 saved wallets (free: 3)<br>
+      ✅ 20 truffles (free: 5)<br>
+      ✅ 5 monitored truffles (free: 1)<br>
+      ✅ 30-day snapshot history<br>
+      ✅ All premium themes<br>
+      ✅ AI roasts & shills — 20/day<br>
+      ✅ TruffleCheck — 12/day
+    </div>
+    <button class="btn btn-primary btn-full">Upgrade to Pro</button>
+  </div>
+  <div class="card" style="text-align:center;border-color:var(--yellow);">
+    <div style="font-size:36px;margin-bottom:10px;">💎</div>
+    <div class="card-title" style="font-size:18px;">VIP</div>
+    <div style="font-size:28px;font-weight:700;color:var(--yellow);margin:10px 0;">Invite Only</div>
+    <div class="card-desc" style="margin-bottom:18px;text-align:left;">
+      ✅ Everything in Pro<br>
+      ✅ VIP badge<br>
+      ✅ Early access to features<br>
+      ✅ Direct line to @bigoinker<br>
+      ✅ Founders NFT perks
+    </div>
+    <button class="btn btn-secondary btn-full" disabled>By Invitation Only</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Already a holder?</div>
+  <div class="card-desc" style="margin-bottom:14px;">Hold Based Wojak tokens or a Founders NFT to unlock free Pro access.</div>
+  <div style="display:flex;gap:10px;">
+    <a href="/verify"><button class="btn btn-secondary">🪙 WOJAK Verify</button></a>
+    <a href="/verifynft"><button class="btn btn-secondary">🏅 Founders NFT</button></a>
+  </div>
+</div>
+{% endblock %}

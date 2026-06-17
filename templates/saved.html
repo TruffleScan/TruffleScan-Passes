@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% set active = "saved" %}
+{% block title %}TruffleScan — Saved Scans{% endblock %}
+{% block page_title %}⚡️ Saved Scans{% endblock %}
+{% block page_subtitle %}Instant PnL on your saved wallet + token combos{% endblock %}
+{% block content %}
+<div class="card" style="display:flex;gap:10px;align-items:flex-end;">
+  <div class="form-group" style="flex:1;margin:0;">
+    <label class="form-label">Wallet Address</label>
+    <input class="form-input" type="text" placeholder="SOL, ETH, or Base wallet...">
+  </div>
+  <div class="form-group" style="flex:1;margin:0;">
+    <label class="form-label">Token Contract</label>
+    <input class="form-input" type="text" placeholder="Token address...">
+  </div>
+  <button class="btn btn-primary">Save Scan</button>
+</div>
+<div class="card">
+  <div class="card-title">My Truffles</div>
+  <div class="empty-state">
+    <div class="empty-icon">⚡️</div>
+    <div class="empty-title">No saved scans</div>
+    <div class="empty-desc">Save a wallet + token combo above for instant one-click PnL.</div>
+  </div>
+</div>
+{% endblock %}
