@@ -516,6 +516,15 @@
 </div>
 
 <script>
+// ─── EIP-6963 WALLET DISCOVERY ─────────────────────────────────────────────────
+const eip6963Providers = [];
+window.addEventListener("eip6963:announceProvider", (event) => {
+  if (!eip6963Providers.find(p => p.info.uuid === event.detail.info.uuid)) {
+    eip6963Providers.push(event.detail);
+  }
+});
+window.dispatchEvent(new Event("eip6963:requestProvider"));
+
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 const CONTRACT_ADDRESS = "0x4FD630814923E7c788EBbb650D48706bD5943582";
 const BASE_CHAIN_ID    = 8453n;
@@ -853,9 +862,31 @@ function _providerLabel(p) {
   return p.providerInfo?.name || p.name || "Unknown Wallet";
 }
 
+function _getAllProviders() {
+  // Prefer EIP-6963 announced providers (modern standard, catches most wallets)
+  const seen = new Set();
+  const all = [];
+
+  eip6963Providers.forEach(({ info, provider }) => {
+    all.push({ provider, label: info.name });
+    seen.add(provider);
+  });
+
+  // Fallback: legacy injected providers not caught by EIP-6963
+  const legacy = window.ethereum?.providers || (window.ethereum ? [window.ethereum] : []);
+  legacy.forEach(p => {
+    if (!seen.has(p)) {
+      all.push({ provider: p, label: _providerLabel(p) });
+      seen.add(p);
+    }
+  });
+
+  return all;
+}
+
 function showOtherWallets() {
   const listEl = document.getElementById("otherWalletList");
-  const providers = window.ethereum?.providers || (window.ethereum ? [window.ethereum] : []);
+  const providers = _getAllProviders();
 
   if (providers.length === 0) {
     listEl.innerHTML = `<div class="wallet-option-sub" style="padding:8px 0;">No wallet extensions detected.</div>`;
@@ -866,7 +897,7 @@ function showOtherWallets() {
     <div class="wallet-option" onclick="connectWithProvider('byIndex', ${i})">
       <div class="wallet-option-icon">💼</div>
       <div>
-        <div class="wallet-option-name">${_providerLabel(p)}</div>
+        <div class="wallet-option-name">${p.label}</div>
         <div class="wallet-option-sub">Browser extension</div>
       </div>
     </div>
@@ -879,8 +910,8 @@ async function connectWithProvider(type, index) {
   let ethProvider = null;
 
   if (type === "byIndex") {
-    const providers = window.ethereum?.providers || (window.ethereum ? [window.ethereum] : []);
-    ethProvider = providers[index];
+    const providers = _getAllProviders();
+    ethProvider = providers[index]?.provider;
   } else if (window.ethereum?.providers) {
     // Multiple wallets injected — pick the right one
     if (type === "metamask") {
