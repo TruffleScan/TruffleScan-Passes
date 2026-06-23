@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TruffleScan Founders Collection</title>
+<link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+<link rel="icon" type="image/png" href="/static/favicon.png">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -524,6 +526,9 @@ window.addEventListener("eip6963:announceProvider", (event) => {
   }
 });
 window.dispatchEvent(new Event("eip6963:requestProvider"));
+// Re-request after extensions finish loading their content scripts
+setTimeout(() => window.dispatchEvent(new Event("eip6963:requestProvider")), 500);
+setTimeout(() => window.dispatchEvent(new Event("eip6963:requestProvider")), 1500);
 
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 const CONTRACT_ADDRESS = "0x4FD630814923E7c788EBbb650D48706bD5943582";
