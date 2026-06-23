@@ -466,13 +466,14 @@
         <div class="wallet-option-sub">Browser extension</div>
       </div>
     </div>
-    <div class="wallet-option" onclick="connectWithProvider('injected')">
+    <div class="wallet-option" onclick="showOtherWallets()">
       <div class="wallet-option-icon">💼</div>
       <div>
         <div class="wallet-option-name">Other Wallet</div>
-        <div class="wallet-option-sub">Any injected provider</div>
+        <div class="wallet-option-sub">Choose from installed extensions</div>
       </div>
     </div>
+    <div id="otherWalletList"></div>
     <button class="wallet-picker-cancel" onclick="closeWalletPicker()">Cancel</button>
   </div>
 </div>
@@ -515,6 +516,18 @@
 </div>
 
 <script>
+// ─── EIP-6963 WALLET DISCOVERY ─────────────────────────────────────────────────
+const eip6963Providers = [];
+window.addEventListener("eip6963:announceProvider", (event) => {
+  if (!eip6963Providers.find(p => p.info.uuid === event.detail.info.uuid)) {
+    eip6963Providers.push(event.detail);
+  }
+});
+window.dispatchEvent(new Event("eip6963:requestProvider"));
+// Re-request after extensions finish loading their content scripts
+setTimeout(() => window.dispatchEvent(new Event("eip6963:requestProvider")), 500);
+setTimeout(() => window.dispatchEvent(new Event("eip6963:requestProvider")), 1500);
+
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 const CONTRACT_ADDRESS = "0x4FD630814923E7c788EBbb650D48706bD5943582";
 const BASE_CHAIN_ID    = 8453n;
@@ -841,12 +854,68 @@ function closeWalletPicker() {
   document.getElementById("walletPicker").classList.remove("open");
 }
 
-async function connectWithProvider(type) {
+function _providerLabel(p) {
+  if (p.isMetaMask && !p.isCoinbaseWallet) return "MetaMask";
+  if (p.isCoinbaseWallet) return "Coinbase Wallet";
+  if (p.isRabby) return "Rabby";
+  if (p.isBraveWallet) return "Brave Wallet";
+  if (p.isPhantom) return "Phantom";
+  if (p.isTrust) return "Trust Wallet";
+  if (p.isOkxWallet || p.isOKExWallet) return "OKX Wallet";
+  return p.providerInfo?.name || p.name || "Unknown Wallet";
+}
+
+function _getAllProviders() {
+  // Prefer EIP-6963 announced providers (modern standard, catches most wallets)
+  const seen = new Set();
+  const all = [];
+
+  eip6963Providers.forEach(({ info, provider }) => {
+    all.push({ provider, label: info.name });
+    seen.add(provider);
+  });
+
+  // Fallback: legacy injected providers not caught by EIP-6963
+  const legacy = window.ethereum?.providers || (window.ethereum ? [window.ethereum] : []);
+  legacy.forEach(p => {
+    if (!seen.has(p)) {
+      all.push({ provider: p, label: _providerLabel(p) });
+      seen.add(p);
+    }
+  });
+
+  return all;
+}
+
+function showOtherWallets() {
+  const listEl = document.getElementById("otherWalletList");
+  const providers = _getAllProviders();
+
+  if (providers.length === 0) {
+    listEl.innerHTML = `<div class="wallet-option-sub" style="padding:8px 0;">No wallet extensions detected.</div>`;
+    return;
+  }
+
+  listEl.innerHTML = providers.map((p, i) => `
+    <div class="wallet-option" onclick="connectWithProvider('byIndex', ${i})">
+      <div class="wallet-option-icon">💼</div>
+      <div>
+        <div class="wallet-option-name">${p.label}</div>
+        <div class="wallet-option-sub">Browser extension</div>
+      </div>
+    </div>
+  `).join("");
+}
+
+async function connectWithProvider(type, index) {
   closeWalletPicker();
 
   let ethProvider = null;
 
-  if (window.ethereum?.providers) {
+  if (type === "byIndex") {
+    const providers = _getAllProviders();
+    ethProvider = providers[index]?.provider;
+  } else if (window.ethereum?.providers) {
     // Multiple wallets injected — pick the right one
     if (type === "metamask") {
       ethProvider = window.ethereum.providers.find(p => p.isMetaMask && !p.isCoinbaseWallet);
