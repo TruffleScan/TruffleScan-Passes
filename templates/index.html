@@ -582,9 +582,9 @@ let isCorrectNetwork = false;
 function currentRegularPriceEth() {
   const now = Math.floor(Date.now() / 1000);
   if (now < PHASE2_AT) return "0.030";
-  if (now < PHASE3_AT) return "0.033";
-  if (now < PHASE4_AT) return "0.038";
-  return "0.0455";
+  if (now < PHASE3_AT) return "0.04";
+  if (now < PHASE4_AT) return "0.05";
+  return "0.07";
 }
 
 function priceForId(id) {
